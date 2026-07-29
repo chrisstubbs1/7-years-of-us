@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+:root {
+  --lilac-50: #fbf7fc;
+  --lilac-100: #f3eaf8;
+  --lilac-200: #e6d5f2;
+  --lilac-300: #d4bce6;
+  --lilac-400: #c9a0dc;
+  --lilac-500: #b794c0;
+  --lilac-600: #9b7bb8;
+  --lilac-700: #7a5f96;
+  --lilac-800: #5a4570;
+  --lilac-900: #3d2a4a;
+  --rose-soft: #e8c4c4;
+  --lavender: #d4c1ec;
+  --cream: #fbf8fc;
+  --ink: #3d2a4a;
+  --ink-muted: #6b5578;
+  --background: var(--cream);
+  --foreground: var(--ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-lilac-50: var(--lilac-50);
+  --color-lilac-100: var(--lilac-100);
+  --color-lilac-200: var(--lilac-200);
+  --color-lilac-300: var(--lilac-300);
+  --color-lilac-400: var(--lilac-400);
+  --color-lilac-500: var(--lilac-500);
+  --color-lilac-600: var(--lilac-600);
+  --color-lilac-700: var(--lilac-700);
+  --color-lilac-800: var(--lilac-800);
+  --color-lilac-900: var(--lilac-900);
+  --color-rose-soft: var(--rose-soft);
+  --color-lavender: var(--lavender);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --font-sans: var(--font-serif);
+  --font-serif: var(--font-serif);
+  --font-hand: var(--font-hand);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-serif), Georgia, serif;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--lilac-300);
+  color: var(--lilac-900);
+}
+
+.font-hand {
+  font-family: var(--font-hand), "Segoe Script", cursive;
+}
+
+.font-serif {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+/* Soft atmospheric background */
+.lilac-atmosphere {
+  background:
+    radial-gradient(ellipse 120% 80% at 20% -10%, rgba(201, 160, 220, 0.45), transparent 55%),
+    radial-gradient(ellipse 100% 70% at 90% 10%, rgba(232, 196, 196, 0.35), transparent 50%),
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(212, 193, 236, 0.4), transparent 55%),
+    linear-gradient(180deg, #fbf7fc 0%, #f3eaf8 40%, #efe4f5 100%);
+}
+
+.watercolor-wash {
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(183, 148, 192, 0.18) 0%, transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(232, 196, 196, 0.16) 0%, transparent 35%),
+    radial-gradient(circle at 40% 75%, rgba(212, 193, 236, 0.2) 0%, transparent 45%);
+}
+
+/* Heartbeat pulse on timeline */
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scaleY(1);
+    opacity: 0.55;
+  }
+  15% {
+    transform: scaleY(1.08);
+    opacity: 1;
+  }
+  30% {
+    transform: scaleY(0.96);
+    opacity: 0.7;
+  }
+  45% {
+    transform: scaleY(1.05);
+    opacity: 0.95;
+  }
+  60% {
+    transform: scaleY(1);
+    opacity: 0.6;
+  }
+}
+
+.heartbeat-line {
+  animation: heartbeat 2.4s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.15);
+  }
+}
+
+.sparkle {
+  animation: sparkle 3.5s ease-in-out infinite;
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(4deg);
+  }
+}
+
+.float-soft {
+  animation: float-soft 7s ease-in-out infinite;
+}
+
+/* Safe area for mobile notches */
+.safe-px {
+  padding-left: max(1.25rem, env(safe-area-inset-left));
+  padding-right: max(1.25rem, env(safe-area-inset-right));
+}
+
+.safe-pb {
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+}
+
+.safe-pt {
+  padding-top: max(1rem, env(safe-area-inset-top));
+}
+
+/* Hide scrollbar but keep swipe */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Press-hold progress ring feel */
+@keyframes truth-glow {
+  from {
+    box-shadow: 0 0 0 0 rgba(183, 148, 192, 0.5);
+  }
+  to {
+    box-shadow: 0 0 0 14px rgba(183, 148, 192, 0);
+  }
+}
+
+.truth-holding {
+  animation: truth-glow 1.2s ease-out infinite;
+}
