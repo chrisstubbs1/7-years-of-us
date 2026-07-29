@@ -8,6 +8,7 @@ import type { Chapter } from "@/lib/types";
 import { LilacBloom } from "@/components/LilacBloom";
 import { FloatingSymbols } from "@/components/FloatingSymbols";
 import { HeroBloomField } from "@/components/HeroBloomField";
+import { HomeLink } from "@/components/HomeLink";
 import { MemorySwipe } from "@/components/MemorySwipe";
 import { PressHoldTruth } from "@/components/PressHoldTruth";
 
@@ -27,6 +28,7 @@ export function ChapterExperience({
   return (
     <main className="relative min-h-dvh watercolor-wash">
       {!bloomDone && <LilacBloom onComplete={() => setBloomDone(true)} />}
+      <HomeLink tone="light" />
       <FloatingSymbols symbol={chapter.symbol} />
 
       {/* Full-bleed photo reveal */}
@@ -113,37 +115,40 @@ export function ChapterExperience({
           <MemorySwipe cards={chapter.memoryCards} />
           <PressHoldTruth note={chapter.truthNote} />
 
-          <nav className="mt-10 flex items-center justify-between gap-3 border-t border-lilac-200 pt-6">
-            {prevSlug ? (
-              <Link
-                href={`/chapters/${prevSlug}`}
-                className="min-h-12 flex-1 rounded-full border border-lilac-300 bg-white/60 px-4 py-3 text-center text-sm text-lilac-800 transition active:bg-lilac-100"
-              >
-                ← Previous year
-              </Link>
-            ) : (
-              <Link
-                href="/"
-                className="min-h-12 flex-1 rounded-full border border-lilac-300 bg-white/60 px-4 py-3 text-center text-sm text-lilac-800"
-              >
-                ← Home
-              </Link>
-            )}
-            {nextSlug ? (
-              <Link
-                href={`/chapters/${nextSlug}`}
-                className="min-h-12 flex-1 rounded-full bg-lilac-600 px-4 py-3 text-center text-sm text-white transition active:bg-lilac-700"
-              >
-                Next year →
-              </Link>
-            ) : (
-              <Link
-                href="/promise"
-                className="min-h-12 flex-1 rounded-full bg-lilac-600 px-4 py-3 text-center text-sm text-white"
-              >
-                The promise →
-              </Link>
-            )}
+          <nav className="mt-10 flex flex-col gap-3 border-t border-lilac-200 pt-6">
+            <div className="flex items-center justify-between gap-3">
+              {prevSlug ? (
+                <Link
+                  href={`/chapters/${prevSlug}`}
+                  className="min-h-12 flex-1 rounded-full border border-lilac-300 bg-white/60 px-4 py-3 text-center text-sm text-lilac-800 transition active:bg-lilac-100"
+                >
+                  ← Previous year
+                </Link>
+              ) : (
+                <span className="flex-1" />
+              )}
+              {nextSlug ? (
+                <Link
+                  href={`/chapters/${nextSlug}`}
+                  className="min-h-12 flex-1 rounded-full bg-lilac-600 px-4 py-3 text-center text-sm text-white transition active:bg-lilac-700"
+                >
+                  Next year →
+                </Link>
+              ) : (
+                <Link
+                  href="/promise"
+                  className="min-h-12 flex-1 rounded-full bg-lilac-600 px-4 py-3 text-center text-sm text-white"
+                >
+                  The promise →
+                </Link>
+              )}
+            </div>
+            <Link
+              href="/"
+              className="min-h-11 rounded-full px-4 py-2 text-center text-sm text-lilac-700 underline-offset-4 transition hover:underline"
+            >
+              Back to home
+            </Link>
           </nav>
         </motion.div>
       </section>

@@ -6,53 +6,73 @@ import { FloatingSymbols } from "@/components/FloatingSymbols";
 import { HeartbeatTimeline } from "@/components/HeartbeatTimeline";
 import { siteMeta } from "@/data/chapters";
 
+const petals = [
+  { left: "12%", top: "18%", rotate: -18, delay: 0, size: "h-14 w-9" },
+  { left: "58%", top: "8%", rotate: 22, delay: 0.15, size: "h-16 w-10" },
+  { left: "34%", top: "28%", rotate: 8, delay: 0.08, size: "h-12 w-8" },
+  { left: "72%", top: "32%", rotate: -10, delay: 0.25, size: "h-11 w-7" },
+  { left: "22%", top: "48%", rotate: 14, delay: 0.35, size: "h-12 w-8" },
+];
+
 export function HomeExperience() {
   return (
     <main className="relative min-h-dvh overflow-hidden">
       <FloatingSymbols density="low" symbol="lilac" />
 
-      {/* Hero — one composition: brand, headline, sentence, CTA */}
-      <section className="relative flex min-h-dvh flex-col justify-end safe-px safe-pb">
+      {/* Hero — petals + brand as one tight composition */}
+      <section className="relative flex min-h-dvh flex-col justify-center safe-px safe-pb safe-pt">
         <div
           className="pointer-events-none absolute inset-0"
           aria-hidden
           style={{
             background:
-              "radial-gradient(ellipse 90% 70% at 50% 20%, rgba(201,160,220,0.55), transparent 60%), radial-gradient(ellipse 70% 50% at 80% 80%, rgba(232,196,196,0.35), transparent 55%)",
+              "radial-gradient(ellipse 90% 70% at 50% 30%, rgba(201,160,220,0.55), transparent 60%), radial-gradient(ellipse 70% 50% at 80% 80%, rgba(232,196,196,0.35), transparent 55%)",
           }}
         />
 
-        {/* Soft petal field as visual anchor */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[58dvh]" aria-hidden>
-          <motion.div
-            className="absolute left-1/2 top-[18%] h-56 w-56 -translate-x-1/2 rounded-full bg-gradient-to-br from-lilac-200/80 via-lilac-400/50 to-lilac-600/40 blur-2xl"
-            animate={{ scale: [1, 1.08, 1], opacity: [0.7, 0.9, 0.7] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          />
-          {[
-            { left: "18%", top: "28%", rotate: -18, delay: 0 },
-            { left: "62%", top: "22%", rotate: 22, delay: 0.3 },
-            { left: "40%", top: "38%", rotate: 8, delay: 0.15 },
-            { left: "28%", top: "48%", rotate: -8, delay: 0.45 },
-            { left: "58%", top: "44%", rotate: 14, delay: 0.6 },
-          ].map((p, i) => (
-            <motion.span
-              key={i}
-              className="absolute h-16 w-10 rounded-[50%] bg-gradient-to-b from-lilac-200 to-lilac-500 opacity-70"
-              style={{ left: p.left, top: p.top, rotate: p.rotate }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 0.75, y: 0 }}
-              transition={{ delay: 0.2 + p.delay, duration: 1 }}
-            />
-          ))}
-        </div>
-
         <motion.div
-          className="relative z-10 mx-auto w-full max-w-md pb-6 pt-10"
-          initial={{ opacity: 0, y: 28 }}
+          className="relative z-10 mx-auto w-full max-w-md"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
+          {/* Petal cluster sits directly above the title */}
+          <div className="relative mx-auto mb-5 h-36 w-full max-w-xs" aria-hidden>
+            <motion.div
+              className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-lilac-200/80 via-lilac-400/50 to-lilac-600/40 blur-2xl"
+              animate={{ scale: [1, 1.08, 1], opacity: [0.7, 0.9, 0.7] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {petals.map((p, i) => (
+              <motion.span
+                key={i}
+                className={`absolute rounded-[50%] bg-gradient-to-b from-lilac-200 to-lilac-500 opacity-80 ${p.size}`}
+                style={{ left: p.left, top: p.top, rotate: p.rotate }}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{
+                  opacity: 0.8,
+                  y: [0, -6, 0],
+                  rotate: [p.rotate, p.rotate + 6, p.rotate],
+                }}
+                transition={{
+                  opacity: { delay: 0.15 + p.delay, duration: 0.8 },
+                  y: {
+                    delay: p.delay,
+                    duration: 5 + i,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  },
+                  rotate: {
+                    delay: p.delay,
+                    duration: 7 + i,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  },
+                }}
+              />
+            ))}
+          </div>
+
           <p className="font-hand text-2xl text-lilac-700">a lilac memory book</p>
           <h1 className="mt-2 font-serif text-5xl font-semibold leading-[1.05] tracking-tight text-lilac-900 sm:text-6xl">
             {siteMeta.title}

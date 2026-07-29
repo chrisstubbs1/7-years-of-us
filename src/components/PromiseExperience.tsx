@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FloatingSymbols } from "@/components/FloatingSymbols";
+import { HomeLink } from "@/components/HomeLink";
 import { LilacBloom } from "@/components/LilacBloom";
 import { promiseContent } from "@/data/chapters";
 import { useState } from "react";
@@ -13,6 +14,7 @@ export function PromiseExperience() {
   return (
     <main className="relative min-h-dvh watercolor-wash">
       {!bloomDone && <LilacBloom onComplete={() => setBloomDone(true)} />}
+      <HomeLink tone="dark" />
       <FloatingSymbols symbol="flowers" density="low" />
 
       <div className="relative z-10 mx-auto flex min-h-dvh max-w-lg flex-col justify-center safe-px safe-pb safe-pt py-16">
